@@ -32,7 +32,7 @@ regional US insurance group covering 2005–2014.
 |---|---|---|---|
 | Linear Regression | 1.470 | 1.830 | 0.309 |
 | Random Forest | 0.505 | 0.858 | **0.848** |
-| Facebook Prophet | — | — | Time-series trend |
+| Facebook Prophet | - | - | Time-series trend |
 
 ✅ **Best Model: Random Forest Regressor (R² = 0.848)**
 
@@ -43,6 +43,7 @@ regional US insurance group covering 2005–2014.
 - Commercial Lines grew from $95M to $204M (2005–2014), a 114% increase
 - Average customer retention rate across all agencies: 88.75%
 
+```
 ## 📁 Project Structure
 insurance_sales_forecasting/
 ├── data/
@@ -54,7 +55,7 @@ insurance_sales_forecasting/
 │   └── 03_sql_queries.ipynb
 ├── reports/               # All generated charts and figures
 └── README.md
-
+```
 
 ## 📈 Sample Visualizations
 ![Annual Premium Trend](reports/fig_5_1_annual_premium_trend.png)
