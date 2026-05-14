@@ -32,7 +32,7 @@ regional US insurance group covering 2005–2014.
 |---|---|---|---|
 | Linear Regression | 1.470 | 1.830 | 0.309 |
 | Random Forest | 0.505 | 0.858 | **0.848** |
-| Facebook Prophet | — | — | Time-series trend |
+| Facebook Prophet | - | - | Time-series trend |
 
 ✅ **Best Model: Random Forest Regressor (R² = 0.848)**
 
