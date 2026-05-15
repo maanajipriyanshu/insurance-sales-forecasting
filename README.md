@@ -60,17 +60,19 @@ insurance_sales_forecasting/
 └── README.md
 ```
 
+## Sample Visualizations
+![Annual Premium Trend](reports/fig_5_1_annual_premium_trend.png)
+![Model Comparison](reports/fig_5_9_model_comparison.png)
+![Feature Importance](reports/fig_5_10_feature_importance.png)
+
+
 ## Power BI Dashboards
 Sales Overview Dashboard
 ![Sales Overview Dashboard](reports/Sales_Overview.png)
 ![Financial Health Dashboard](reports/Financial_Health.png)
 ![Predictive Analytics Dashboard](reports/Predictive_Analytics.png)
 
-
-## Sample Visualizations
-![Annual Premium Trend](reports/fig_5_1_annual_premium_trend.png)
-![Model Comparison](reports/fig_5_9_model_comparison.png)
-![Feature Importance](reports/fig_5_10_feature_importance.png)
+![Insurance Sales Forecasting Dashboard](reports/insurance_sales_forecasting.pdf)
 
 ## 🔗 Portfolio
 - **GitHub:** https://github.com/maanajipriyanshu
