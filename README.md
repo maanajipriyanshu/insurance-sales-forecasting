@@ -67,11 +67,20 @@ insurance_sales_forecasting/
 
 
 ## Power BI Dashboards
-Sales Overview Dashboard
+### Sales Overview Dashboard
+
 ![Sales Overview Dashboard](reports/Sales_Overview.png)
+
+### Financial Health Dashboard
+
 ![Financial Health Dashboard](reports/Financial_Health.png)
+
+### Predictive Analytics Dashboard
+
 ![Predictive Analytics Dashboard](reports/Predictive_Analytics.png)
 
+
+### Insurance Sales Forecasting Dashboard
 ![Insurance Sales Forecasting Dashboard](reports/insurance_sales_forecasting.pdf)
 
 ## 🔗 Portfolio
