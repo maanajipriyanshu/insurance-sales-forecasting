@@ -49,15 +49,25 @@ insurance_sales_forecasting/
 ├── data/
 │   ├── raw/               # Original dataset
 │   └── processed/         # Cleaned data, train/test splits
+├── powerbi/
+│ └── insurance_sales_forecasting.pbix
 ├── notebooks/
 │   ├── 01_data_exploration.ipynb
 │   ├── 02_preprocessing_modeling.ipynb
 │   └── 03_sql_queries.ipynb
-├── reports/               # All generated charts and figures
+├── reports/               # All charts, figures and pdf
+├── sql/
 └── README.md
 ```
 
-## 📈 Sample Visualizations
+## Power BI Dashboards
+Sales Overview Dashboard
+![Sales Overview Dashboard](reports/Sales_Overview.png)
+![Financial Health Dashboard](reports/Financial_Health.png)
+![Predictive Analytics Dashboard](reports/Predictive_Analytics.png)
+
+
+## Sample Visualizations
 ![Annual Premium Trend](reports/fig_5_1_annual_premium_trend.png)
 ![Model Comparison](reports/fig_5_9_model_comparison.png)
 ![Feature Importance](reports/fig_5_10_feature_importance.png)
