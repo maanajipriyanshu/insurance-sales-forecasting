@@ -55,7 +55,7 @@ insurance_sales_forecasting/
 │   ├── 01_data_exploration.ipynb
 │   ├── 02_preprocessing_modeling.ipynb
 │   └── 03_sql_queries.ipynb
-├── reports/               # All charts, figures and pdf
+├── reports/               # All charts,diagrams, figures, and pdf
 ├── sql/
 └── README.md
 ```
