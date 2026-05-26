@@ -1,47 +1,65 @@
-# Predictive Analytics for Insurance Sales Forecasting
+# Insurance Sales Performance and Predictive Analytics
+An end-to-end Data Analytics project analyzing agency performance, commercial line growth, and regional written premiums across 1,623 independent agencies from 2005 to 2014.
 
-## 📌 Project Overview
-This project applies predictive analytics to forecast insurance sales 
-(written premium) using historical agency performance data from a 
-regional US insurance group covering 2005–2014.
+---
 
-## 🎯 Objectives
-- Analyze 11 years of insurance sales and financial indicators
-- Build and compare predictive models for sales forecasting
-- Evaluate model accuracy using MAE, RMSE, and R² metrics
-- Provide data-driven recommendations for the finance sector
+## Business Case and Objectives
+In regional insurance operations, setting realistic sales targets and managing risk profile distribution is heavily reliant on clear historical baselines. Relying on basic year-over-year growth averages often overlooks complex relationships between active policy volume, local market saturation, and historical loss ratios.
 
-## 📊 Dataset
-- **Source:** Kaggle — Insurance Agency Performance Dataset
-- **Records:** 213,328 (147,760 after cleaning)
-- **Features:** 49 columns | 1,623 agencies | 6 states | 10 product types
-- **Time Period:** 2005–2015
+Project Goals:
+* Identify Performance Metrics: Map key drivers influencing total written premium volume across 6 US states.
+* Assess Risk and Retention Trends: Evaluate customer loyalty baselines alongside annual claims fluctuations.
+* Build Predictive Baselines: Develop a regression framework to estimate written premium thresholds to assist in proactive resource allocation.
 
-## 🔧 Tools & Technologies
-| Tool | Purpose |
-|---|---|
-| Python (Pandas, NumPy) | Data processing & analysis |
-| Scikit-learn | Machine learning models |
-| Facebook Prophet | Time-series forecasting |
-| Matplotlib / Seaborn | Data visualization |
-| SQLite + SQL | Data querying & aggregation |
-| Power BI | Interactive dashboard |
+---
 
-## 🤖 Models Built
-| Model | MAE | RMSE | R² |
-|---|---|---|---|
-| Linear Regression | 1.470 | 1.830 | 0.309 |
-| Random Forest | 0.505 | 0.858 | **0.848** |
-| Facebook Prophet | - | - | Time-series trend |
+## Tools and Environment
+* Data Processing and Machine Learning: Python 3.13 (Pandas, NumPy, Scikit-Learn)
+* Time-Series Framework: Facebook Prophet
+* Structured Query Layer: SQL (SQLite Engine)
+* Business Intelligence: Power BI Desktop (Interactive Dashboarding)
+* Dataset: 213,328 original records sourced from Kaggle (Insurance Agency Performance Dataset)
 
-✅ **Best Model: Random Forest Regressor (R² = 0.848)**
+---
 
-## 🔑 Key Findings
-- Incurred losses (`PRD_INCRD_LOSSES_AMT`) is the strongest predictor of premium volume
-- New business written premium (`NB_WRTN_PREM_AMT`) is the second most important feature
-- Ohio accounts for 58% of total written premium across the portfolio
-- Commercial Lines grew from $95M to $204M (2005–2014), a 114% increase
-- Average customer retention rate across all agencies: 88.75%
+## Data Pipeline and Cleaning Process
+The raw data contained structural inconsistencies, placeholder values, and incomplete time periods that required deliberate cleaning before any modeling could take place:
+
+* Scope Realignment: Excluded the year 2015 due to incomplete monthly records, ensuring annual trends remained comparable.
+* Negative Value Filtering: Removed records with written premiums less than or equal to 0 representing policy cancellations or reversals rather than active sales performance. This focused the dataset on 147,760 verified operational records.
+* Sentinel Value Treatment: High-risk financial metrics contained 99999 placeholders indicating missing records. These were treated by replacing them with NaN values and carefully imputing column medians to maintain mathematical integrity without creating artificial outlier skew.
+* Feature Engineering: 
+  * Derived AGENCY_AGE from the operational tenure since agency appointment.
+  * Operationalized PREMIUM_GROWTH_YOY (capped between -100% and +1000% to handle extreme volatility).
+  * Applied a log-transformation (log1p) to the highly right-skewed target variable (WRTN_PREM_AMT) to establish a normal distribution for machine learning.
+
+---
+
+## Exploratory Data Analysis and Business Insights
+A multi-tier analytical deep-dive revealed three core structural insights within the portfolio:
+
+* The Shift to Commercial Lines: While Personal Lines premium volume traditionally made up the larger share of the portfolio, a structural pivot occurred over the decade. Commercial Lines premiums grew by 114%, scaling from $95.5M in 2005 to $204.4M in 2014.
+* High Regional Concentration: Market penetration is highly skewed geographically. The state of Ohio represents 58% of the entire portfolio's premium volume ($2.45B), pointing out a clear saturation risk and identifying a strong need for expansion strategies in lower-penetration states like Michigan ($45.7M).
+* Underwriting Health: The portfolio shows strong underlying customer loyalty with a consistent 88.75% average customer retention rate. However, a severe loss ratio spike occurred in 2012, which was normalized through successful underwriting corrections in 2013 and 2014.
+
+---
+
+## SQL Analysis (PostgreSQL/SQLite)
+A local insurance.db database was built to model relational connections between performance components. Key analytical queries included:
+
+```sql
+-- Annual Portfolio Premium and New Business Summary
+SELECT
+    STAT_PROFILE_DATE_YEAR AS Year,
+    COUNT(*) AS Total_Records,
+    ROUND(SUM(WRTN_PREM_AMT), 2) AS Total_Written_Premium,
+    ROUND(AVG(WRTN_PREM_AMT), 2) AS Avg_Premium_Per_Record,
+    ROUND(SUM(NB_WRTN_PREM_AMT), 2) AS Total_New_Business_Premium
+FROM insurance_sales
+GROUP BY STAT_PROFILE_DATE_YEAR
+ORDER BY STAT_PROFILE_DATE_YEAR;
+
+Queries also extracted agency specific risk vectors, ranking the top 10 agencies by volume while auditing their corresponding loss and customer retention ratios.Predictive Modeling FrameworkThe clean data was split into an 80/20 train-test ratio (random_state=42) using 13 input features to test distinct algorithmic approaches:Performance MetricLinear Regression (Baseline)Random Forest Regressor (Log Scale)Mean Absolute Error (MAE)1.4700.505Root Mean Squared Error (RMSE)1.8300.858R-Squared Score (Variance Explained)0.3090.848Analytical EvaluationLinear Regression Baseline: Performed poorly with an R-Squared score of 0.309, confirming that financial indicators and macro insurance premiums scale in non-linear configurations.Random Forest Ensemble: Significantly outperformed the baseline, capturing 84.8% of the variance on log-transformed premium values.Feature Importance Findings: Feature extraction proved that period incurred losses (PRD_INCRD_LOSSES_AMT) held the highest predictive power with an importance score of 0.35, closely followed by new business premium (NB_WRTN_PREM_AMT) at 0.26.Time Series Forecasting: Facebook Prophet was trained on macro annual totals from 2005 to 2012 to project downstream boundaries. While a test window of 2 data points limited structural R-Squared evaluation on macro trends, the model accurately picked up the overall plateau pattern within its confidence interval bounds.Interactive Business Intelligence (Power BI)A cohesive, 3-page interactive dashboard was built to communicate these technical findings clearly to non-technical operational stakeholders:Sales Overview Dashboard: Houses high-level corporate KPIs ($4.01bn Total Premium, $455.64M New Business) alongside time slicers and top agency rank layouts to track growth velocity.Financial Health Analysis: Displays product line deviations between Commercial Lines and Personal Lines, tracks dual-axis retention gauges, and utilizes an estate treemap to visually isolate geographic risk distribution.Predictive Analytics View: Bridges data science with business strategy by plotting the Random Forest predicted-versus-actual scatter cluster directly alongside Prophet's future confidence intervals and explicit model performance error margins.
 
 ```
 ## 📁 Project Structure
@@ -59,6 +77,18 @@ insurance_sales_forecasting/
 ├── sql/
 └── README.md
 ```
+How to Run Locally
+Clone the project:
+
+Bash
+git clone [https://github.com/maanajipriyanshu/insurance-sales-forecasting.git](https://github.com/maanajipriyanshu/insurance-sales-forecasting.git)
+cd insurance-sales-forecasting
+Install core environment dependencies:
+
+Bash
+pip install pandas numpy matplotlib seaborn scikit-learn prophet
+Execution order: Run Jupyter Notebooks 01 through 03 sequentially to rebuild the local SQLite infrastructure and export prediction sets. Open the .pbix file in Power BI Desktop to inspect visual relationships.
+
 
 ## Sample Visualizations
 ![Annual Premium Trend](reports/fig_5_1_annual_premium_trend.png)
