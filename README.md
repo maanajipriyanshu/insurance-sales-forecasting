@@ -3,7 +3,7 @@ An end-to-end Data Analytics project analyzing agency performance, commercial li
 
 ---
 
-## Business Case and Objectives
+## Business Case and Objectives 
 In regional insurance operations, setting realistic sales targets and managing risk profile distribution is heavily reliant on clear historical baselines. Relying on basic year-over-year growth averages often overlooks complex relationships between active policy volume, local market saturation, and historical loss ratios.
 
 Project Goals:
