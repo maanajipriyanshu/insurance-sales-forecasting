@@ -14,7 +14,7 @@ Project Goals:
 ---
 
 ## Tools and Environment
-* Data Processing and Machine Learning: Python 3.13 (Pandas, NumPy, Scikit-Learn)
+* Data Processing and Machine Learning: Python 3.13 (NumPy, Pandas, Scikit-Learn)
 * Time-Series Framework: Facebook Prophet
 * Structured Query Layer: SQL (SQLite Engine)
 * Business Intelligence: Power BI Desktop (Interactive Dashboarding)
