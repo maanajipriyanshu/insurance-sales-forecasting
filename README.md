@@ -1,5 +1,5 @@
 # Insurance Sales Performance and Predictive Analytics
-An end-to-end Data Analytics project analyzing agency performance, commercial line growth, and regional written premiums across 1,623 independent agencies from 2005 to 2014.
+An end-to-end Data Analytics project analyzing agency performance, commercial line growth, and regional written premiums across 1,623 independent agencies from 2005 - 2014.
 
 ---
 
